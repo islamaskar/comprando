@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<title>Comprando</title>
+	<style>
+		#comp {
+			text-align: center;
+			margin-top: 8%;
+		}
+		
+		#comp img {
+			margin-bottom: 3%;
+			transform: scale(0.75, 0.75);
+		}
+	</style>
+	
+</head>
+
+<body>
+	<div id="comp">
+		<img src="images\Logo.png" /><br/>
+		<img src="images\Comprando.png" /><br/>
+		<img src="images\COMING SOON.png" />
+	</div>
+	<script>
+		var randomColor = function(){ 
+			document.body.style.backgroundColor = rand;
+			var colors = ["#FE414F", "#131331", "#FF7669", "#FFB000", "#1F6054", "#A2D4E7"];
+			var rand = colors[Math.floor(Math.random() * colors.length)];
+			document.body.style.backgroundColor = rand;
+		};
+		randomColor();
+		setInterval(randomColor, 10000);
+	</script>
+</body>
+
+</html>
