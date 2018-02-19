@@ -1,0 +1,187 @@
+{
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "Comprando.io API V1",
+    "url" : "http://api.comprando.io/v1/"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/Comprando3/Comprando/1.0.0"
+  } ],
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "Comprando API V1",
+    "description" : "This is the first version of the API used for mobile clients"
+  },
+  "paths" : {
+    "/authenticate" : {
+      "post" : {
+        "summary" : "Authenticate user and get JWT",
+        "description" : "This is the entry point for the API you have to get the JSON Web Token to access the rest of API resources.\n",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "auth_token" : {
+                      "type" : "string"
+                    },
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "errors" : [ "Invalid Email/Mobile or Password" ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "You have to provide some paramters to authenticate send Email or Mobile and password",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string",
+                    "required" : [ "email", "password" ]
+                  }
+                },
+                "example" : {
+                  "email" : "islam.askar@gmail.com",
+                  "password" : "123456"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register" : {
+      "post" : {
+        "summary" : "Register user to the system",
+        "description" : "Add a user to the system\n",
+        "security" : [ ],
+        "responses" : {
+          "201" : {
+            "description" : "Entity Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "auth_token" : {
+                      "type" : "string"
+                    },
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "summary" : "List all users",
+        "description" : "This is an example opeartion to show how security is applied to the call.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/ping" : {
+      "get" : {
+        "summary" : "Server heartbeat operation",
+        "description" : "This operation shows how to override the global security defined above, as we want to open it up for all users.",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  },
+  "security" : [ {
+    "bearerAuth" : [ ]
+  }, {
+    "accessCode" : [ "read", "write" ]
+  } ]
+}
