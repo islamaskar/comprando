@@ -175,7 +175,7 @@
                     }
                   },
                   "example" : {
-                    "errors" : [ "Invalid Email" ]
+                    "email" : [ "has already been taken" ]
                   }
                 }
               }
