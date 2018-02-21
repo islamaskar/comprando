@@ -40,6 +40,17 @@
                         },
                         "full_name" : {
                           "type" : "string"
+                        },
+                        "mobile" : {
+                          "type" : "string"
+                        },
+                        "avatar" : {
+                          "type" : "object",
+                          "properties" : {
+                            "url" : {
+                              "type" : "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -49,7 +60,11 @@
                     "user" : {
                       "id" : 1,
                       "email" : "islam.askar@gmail.com",
-                      "full_name" : "Islam Askar"
+                      "full_name" : "Islam Askar",
+                      "mobile" : "01111100956",
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      }
                     }
                   }
                 }
@@ -76,7 +91,7 @@
           }
         },
         "requestBody" : {
-          "description" : "You have to provide some paramters to authenticate send Email or Mobile and password",
+          "description" : "You have to provide some paramters to authenticate, send Email or Mobile and password",
           "required" : true,
           "content" : {
             "application/json" : {
@@ -87,10 +102,10 @@
                     "type" : "string"
                   },
                   "password" : {
-                    "type" : "string",
-                    "required" : [ "email", "password" ]
+                    "type" : "string"
                   }
                 },
+                "required" : [ "email", "password" ],
                 "example" : {
                   "email" : "islam.askar@gmail.com",
                   "password" : "123456"
@@ -137,8 +152,84 @@
                     "user" : {
                       "id" : 1,
                       "email" : "islam.askar@gmail.com",
-                      "full_name" : "Islam Askar"
+                      "full_name" : "Islam Askar",
+                      "mobile" : "01111100956",
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      }
                     }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "errors" : [ "Invalid Email" ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "To register send the following Full name, Email, Mobile, Password and Avatar as base64 string",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "user" : {
+                    "type" : "object",
+                    "properties" : {
+                      "full_name" : {
+                        "type" : "string"
+                      },
+                      "mobile" : {
+                        "type" : "string"
+                      },
+                      "email" : {
+                        "type" : "string"
+                      },
+                      "password" : {
+                        "type" : "string"
+                      },
+                      "avatar" : {
+                        "type" : "string",
+                        "format" : "byte"
+                      },
+                      "provider" : {
+                        "type" : "string",
+                        "enum" : [ "google_oauth2", "facebook_oauth2" ]
+                      },
+                      "uid" : {
+                        "type" : "string",
+                        "description" : "Facebook Client ID / Google ID"
+                      }
+                    },
+                    "required" : [ "email", "password", "mobile" ]
+                  }
+                },
+                "example" : {
+                  "user" : {
+                    "full_name" : "Islam Askar",
+                    "mobile" : "01111100956",
+                    "email" : "islam.askar@gmail.com",
+                    "password" : "123456",
+                    "avatar" : "data:image/jpeg;base64,/9j/4AAQ....",
+                    "provider" : "google_oauth2",
+                    "uid" : "1488792969"
                   }
                 }
               }
@@ -171,6 +262,30 @@
     }
   },
   "components" : {
+    "schemas" : {
+      "User" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "full_name" : {
+            "type" : "string"
+          },
+          "avatar" : {
+            "type" : "object",
+            "properties" : {
+              "url" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "securitySchemes" : {
       "bearerAuth" : {
         "type" : "http",
