@@ -264,6 +264,27 @@
       "get" : {
         "summary" : "List nearby/offshore shops based on parameters",
         "description" : "List nearby/offshore shops based on parameters",
+        "parameters" : [ {
+          "name" : "shop_type",
+          "in" : "query",
+          "type" : "string",
+          "description" : "Determine the type of the desired shops ( nearby / offshore )"
+        }, {
+          "name" : "country_id",
+          "in" : "query",
+          "type" : "integer",
+          "description" : "Specifies the id of the country to search in"
+        }, {
+          "name" : "city_id",
+          "in" : "query",
+          "type" : "integer",
+          "description" : "Specifies the id of the city to search in"
+        }, {
+          "name" : "region_id",
+          "in" : "query",
+          "type" : "integer",
+          "description" : "Specifies the id of the region to search in"
+        } ],
         "responses" : {
           "200" : {
             "description" : "Successfully returned a list of shops"
