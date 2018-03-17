@@ -238,51 +238,38 @@
         }
       }
     },
-    "/users" : {
-      "get" : {
-        "summary" : "List all users",
-        "description" : "This is an example opeartion to show how security is applied to the call.",
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/ping" : {
-      "get" : {
-        "summary" : "Server heartbeat operation",
-        "description" : "This operation shows how to override the global security defined above, as we want to open it up for all users.",
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
     "/shops" : {
       "get" : {
         "summary" : "List nearby/offshore shops based on parameters",
         "description" : "List nearby/offshore shops based on parameters",
+        "security" : [ ],
         "parameters" : [ {
-          "name" : "shop_type",
           "in" : "query",
-          "type" : "string",
+          "name" : "shop_type",
+          "schema" : {
+            "type" : "string"
+          },
           "description" : "Determine the type of the desired shops ( nearby / offshore )"
         }, {
           "name" : "country_id",
           "in" : "query",
-          "type" : "integer",
+          "schema" : {
+            "type" : "integer"
+          },
           "description" : "Specifies the id of the country to search in"
         }, {
           "name" : "city_id",
           "in" : "query",
-          "type" : "integer",
+          "schema" : {
+            "type" : "integer"
+          },
           "description" : "Specifies the id of the city to search in"
         }, {
           "name" : "region_id",
           "in" : "query",
-          "type" : "integer",
+          "schema" : {
+            "type" : "integer"
+          },
           "description" : "Specifies the id of the region to search in"
         } ],
         "responses" : {
