@@ -259,6 +259,17 @@
           }
         }
       }
+    },
+    "/shops" : {
+      "get" : {
+        "summary" : "List nearby/offshore shops based on parameters",
+        "description" : "List nearby/offshore shops based on parameters",
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list of shops"
+          }
+        }
+      }
     }
   },
   "components" : {
