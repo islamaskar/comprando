@@ -240,7 +240,7 @@
     },
     "/categories" : {
       "get" : {
-        "summary" : "List Shops categories",
+        "summary" : "List shops categories",
         "description" : "Return all the shop categories",
         "security" : [ ],
         "responses" : {
@@ -338,6 +338,103 @@
         "responses" : {
           "200" : {
             "description" : "Successfully returned a list of shops"
+          }
+        }
+      }
+    },
+    "/shops/{shop_id}/products" : {
+      "get" : {
+        "summary" : "List shop products",
+        "description" : "List shop products with their categories",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The shop id which the products belong to"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list of shop products",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "categories" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "products" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : {
+                                  "type" : "integer"
+                                },
+                                "name" : {
+                                  "type" : "string"
+                                },
+                                "description" : {
+                                  "type" : "string"
+                                },
+                                "price" : {
+                                  "type" : "number",
+                                  "format" : "float"
+                                },
+                                "images" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                      "url" : {
+                                        "type" : "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "categories" : [ {
+                      "name" : "Dessert",
+                      "products" : [ {
+                        "id" : 10,
+                        "name" : "Macaroons",
+                        "description" : "Box of 7 Macaroons",
+                        "price" : 56,
+                        "images" : [ {
+                          "url" : "/uploads/product/images/10/1.png"
+                        }, {
+                          "url" : "/uploads/product/images/10/2.png"
+                        } ]
+                      }, {
+                        "id" : 1,
+                        "name" : "new",
+                        "description" : "test",
+                        "price" : 18,
+                        "images" : [ {
+                          "url" : "/uploads/product/images/1/3.png"
+                        } ]
+                      } ]
+                    } ]
+                  }
+                }
+              }
+            }
           }
         }
       }
