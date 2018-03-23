@@ -438,6 +438,89 @@
           }
         }
       }
+    },
+    "/shops/{shop_id}/products/{product_id}" : {
+      "get" : {
+        "summary" : "View prodct details",
+        "description" : "View prodct details with its category",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The shop id which the product belongs to"
+        }, {
+          "in" : "path",
+          "name" : "product_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The product id which will be displayed"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned an object of product contains the product details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "product" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "name" : {
+                          "type" : "string"
+                        },
+                        "description" : {
+                          "type" : "string"
+                        },
+                        "price" : {
+                          "type" : "number",
+                          "format" : "float"
+                        },
+                        "images" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "product" : {
+                      "id" : 10,
+                      "name" : "Macaroons",
+                      "description" : "Box of 7 Macaroons",
+                      "price" : 56,
+                      "images" : [ {
+                        "url" : "/uploads/product/images/10/1.png"
+                      }, {
+                        "url" : "/uploads/product/images/10/2.png"
+                      } ],
+                      "category" : {
+                        "name" : "Dessert"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
