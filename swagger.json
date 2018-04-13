@@ -462,6 +462,69 @@
         }
       }
     },
+    "/countries" : {
+      "get" : {
+        "summary" : "List all supported countries",
+        "description" : "Return all the supported countries with country code and the flag",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the countries",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "countries" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "country_code" : {
+                            "type" : "string"
+                          },
+                          "flag" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "countries" : [ {
+                      "id" : 1,
+                      "name" : "Egypt",
+                      "country_code" : "20",
+                      "flag" : {
+                        "url" : "/uploads/country/flag/1/rsz_flag_of_egypt_variant.png"
+                      }
+                    }, {
+                      "id" : 2,
+                      "name" : "KSA",
+                      "country_code" : "966",
+                      "flag" : {
+                        "url" : null
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/categories" : {
       "get" : {
         "summary" : "List shops categories",
