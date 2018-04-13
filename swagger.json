@@ -51,6 +51,9 @@
                               "type" : "string"
                             }
                           }
+                        },
+                        "mobile_verified" : {
+                          "type" : "boolean"
                         }
                       }
                     }
@@ -64,7 +67,8 @@
                       "mobile" : "01111100956",
                       "avatar" : {
                         "url" : "/uploads/user/avatar/6/avatar.jpeg"
-                      }
+                      },
+                      "mobile_verified" : false
                     }
                   }
                 }
@@ -143,6 +147,9 @@
                         },
                         "full_name" : {
                           "type" : "string"
+                        },
+                        "mobile_verified" : {
+                          "type" : "boolean"
                         }
                       }
                     }
@@ -156,7 +163,8 @@
                       "mobile" : "01111100956",
                       "avatar" : {
                         "url" : "/uploads/user/avatar/6/avatar.jpeg"
-                      }
+                      },
+                      "mobile_verified" : false
                     }
                   }
                 }
@@ -216,6 +224,160 @@
                       "uid" : {
                         "type" : "string",
                         "description" : "Facebook Client ID / Google ID"
+                      },
+                      "country_id" : {
+                        "type" : "integer"
+                      },
+                      "verification_method" : {
+                        "type" : "string",
+                        "enum" : [ "call", "sms" ]
+                      }
+                    },
+                    "required" : [ "email", "password", "mobile", "verification_method", "country_id" ]
+                  }
+                },
+                "example" : {
+                  "user" : {
+                    "full_name" : "Islam Askar",
+                    "mobile" : "01111100956",
+                    "email" : "islam.askar@gmail.com",
+                    "password" : "123456",
+                    "avatar" : "data:image/jpeg;base64,/9j/4AAQ....",
+                    "provider" : "google_oauth2",
+                    "uid" : "1488792969",
+                    "verification_method" : "call",
+                    "country_id" : 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobile/verify" : {
+      "post" : {
+        "summary" : "Verify the mobile number with the code sent",
+        "description" : "Send verification code to Twilio to complete the verification process",
+        "requestBody" : {
+          "description" : "send the verification code in the body",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "verification_code" : {
+                    "type" : "string"
+                  }
+                },
+                "example" : {
+                  "verification_code" : "1576"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Ok, Phone verified",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "Mobile is successfully verified!"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "message" : [ "Wrong verification code" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobile/resend" : {
+      "get" : {
+        "summary" : "Resend the verification code",
+        "description" : "Resend the verification code again to the registered user mobile",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "New SMS sent!"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "message" : [ "invalid country_code" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile" : {
+      "patch" : {
+        "summary" : "Edit logged in user profile",
+        "description" : "Update the user info",
+        "requestBody" : {
+          "description" : "To register send the following Full name, Email, Mobile, Password and Avatar as base64 string",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "user" : {
+                    "type" : "object",
+                    "properties" : {
+                      "full_name" : {
+                        "type" : "string"
+                      },
+                      "mobile" : {
+                        "type" : "string"
+                      },
+                      "email" : {
+                        "type" : "string"
+                      },
+                      "password" : {
+                        "type" : "string"
+                      },
+                      "avatar" : {
+                        "type" : "string",
+                        "format" : "byte"
                       }
                     },
                     "required" : [ "email", "password", "mobile" ]
@@ -227,9 +389,71 @@
                     "mobile" : "01111100956",
                     "email" : "islam.askar@gmail.com",
                     "password" : "123456",
-                    "avatar" : "data:image/jpeg;base64,/9j/4AAQ....",
-                    "provider" : "google_oauth2",
-                    "uid" : "1488792969"
+                    "avatar" : "data:image/jpeg;base64,/9j/4AAQ...."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User data updated successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        },
+                        "mobile" : {
+                          "type" : "string"
+                        },
+                        "country_id" : {
+                          "type" : "integer"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar",
+                      "mobile" : "1111100956",
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      },
+                      "mobile_verified" : true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "email" : [ "has already been taken" ]
                   }
                 }
               }
