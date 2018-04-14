@@ -312,7 +312,7 @@
       }
     },
     "/mobile/resend" : {
-      "get" : {
+      "post" : {
         "summary" : "Resend the verification code",
         "description" : "Resend the verification code again to the registered user mobile",
         "responses" : {
