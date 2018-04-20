@@ -525,6 +525,103 @@
         }
       }
     },
+    "/cities" : {
+      "get" : {
+        "summary" : "List all cities for offshore",
+        "description" : "Return all cities",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the cities",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cities" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "cities" : [ {
+                      "id" : 1,
+                      "name" : "Cairo"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/regions" : {
+      "get" : {
+        "summary" : "List all regions for nearby",
+        "description" : "Return all regions based on country or city parameterse",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "country_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the country to filter with"
+        }, {
+          "name" : "city_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the city to filter with"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the regions",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cities" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "regions" : [ {
+                      "id" : 1,
+                      "name" : "New Cairo"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/categories" : {
       "get" : {
         "summary" : "List shops categories",
