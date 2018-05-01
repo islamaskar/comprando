@@ -867,6 +867,77 @@
         }
       }
     },
+    "/shops/featured" : {
+      "get" : {
+        "summary" : "List all featured shops for the slider",
+        "description" : "Return all featured shops optianly on category_id",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "category_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the category to filter with"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the shops",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "shops" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "featured_image" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          },
+                          "logo" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "shops" : [ {
+                      "id" : 1,
+                      "name" : "Alef",
+                      "featured_image" : {
+                        "url" : "http://stagging.comprando.io/uploads/shop/featured_image/1/20160918182926_26945_oZH.jpg"
+                      },
+                      "logo" : {
+                        "url" : "http://stagging.comprando.io/uploads/shop/logo/1/alef.jpg"
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/shops/{shop_id}/products" : {
       "get" : {
         "summary" : "List shop products",
