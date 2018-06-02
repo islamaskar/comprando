@@ -725,6 +725,13 @@
             "type" : "integer"
           },
           "description" : "Specifies the id of the region to search in"
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "filter by (rate,delivery_time,most_popular,recommended)"
         } ],
         "responses" : {
           "200" : {
@@ -732,19 +739,37 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "categories" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "object",
-                        "properties" : {
-                          "name" : {
-                            "type" : "string"
-                          },
-                          "shops" : {
-                            "type" : "array",
-                            "items" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "branches" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "id" : {
+                              "type" : "integer"
+                            },
+                            "name" : {
+                              "type" : "string"
+                            },
+                            "open" : {
+                              "type" : "boolean"
+                            },
+                            "rate" : {
+                              "type" : "integer"
+                            },
+                            "delivery_time" : {
+                              "type" : "string"
+                            },
+                            "shop" : {
                               "type" : "object",
                               "properties" : {
                                 "id" : {
@@ -769,58 +794,6 @@
                                 },
                                 "featured" : {
                                   "type" : "boolean"
-                                },
-                                "branches" : {
-                                  "type" : "array",
-                                  "items" : {
-                                    "type" : "object",
-                                    "properties" : {
-                                      "id" : {
-                                        "type" : "integer"
-                                      },
-                                      "name" : {
-                                        "type" : "string"
-                                      },
-                                      "phone" : {
-                                        "type" : "string"
-                                      },
-                                      "email" : {
-                                        "type" : "string"
-                                      },
-                                      "open_at" : {
-                                        "type" : "array"
-                                      },
-                                      "close_at" : {
-                                        "type" : "array"
-                                      },
-                                      "rate" : {
-                                        "type" : "integer"
-                                      },
-                                      "country_id" : {
-                                        "type" : "integer"
-                                      },
-                                      "city_id" : {
-                                        "type" : "integer"
-                                      },
-                                      "region_id" : {
-                                        "type" : "integer"
-                                      },
-                                      "shop_id" : {
-                                        "type" : "integer"
-                                      },
-                                      "created_at" : {
-                                        "type" : "string",
-                                        "format" : "date-time"
-                                      },
-                                      "updated_at" : {
-                                        "type" : "string",
-                                        "format" : "date-time"
-                                      },
-                                      "delivery_time" : {
-                                        "type" : "string"
-                                      }
-                                    }
-                                  }
                                 }
                               }
                             }
@@ -829,37 +802,63 @@
                       }
                     }
                   },
-                  "example" : {
-                    "categories" : [ {
-                      "name" : "Bakery",
-                      "shops" : [ {
+                  "example" : [ {
+                    "name" : "Bookstores",
+                    "id" : 1,
+                    "branches" : [ {
+                      "id" : 1,
+                      "name" : "Downtwon branch",
+                      "rate" : 5,
+                      "open" : false,
+                      "delivery_time" : null,
+                      "shop" : {
                         "id" : 1,
-                        "name" : "Nola",
-                        "description" : "Test Shop1",
-                        "shop_type" : "nearby",
+                        "name" : "Alef",
+                        "description" : "One of biggest bookstores in Egypt",
+                        "shop_type" : "Nearby",
                         "logo" : {
-                          "url" : "/uploads/shop/logo/1/dcb27810356499.560e39646a276.png"
+                          "url" : "http://stagging.comprando.io/uploads/shop/logo/1/ALEF-bookstores-logo.png"
                         },
-                        "featured" : false,
-                        "branches" : [ {
-                          "id" : 1,
-                          "name" : "AUC branch",
-                          "phone" : "01155533355",
-                          "email" : "auc.branch@nola.com",
-                          "open_at" : [ "10 am" ],
-                          "close_at" : [ "11 pm" ],
-                          "rate" : 5,
-                          "country_id" : 1,
-                          "city_id" : 1,
-                          "region_id" : 1,
-                          "shop_id" : 1,
-                          "created_at" : "2018-04-08T17:49:44.617Z",
-                          "updated_at" : "2018-04-08T17:49:44.617Z",
-                          "delivery_time" : "1 hour"
-                        } ]
-                      } ]
+                        "featured" : false
+                      }
+                    }, {
+                      "id" : 3,
+                      "name" : "Down twon",
+                      "rate" : 5,
+                      "open" : false,
+                      "delivery_time" : null,
+                      "shop" : {
+                        "id" : 2,
+                        "name" : "Dar Alshrouq",
+                        "description" : "Biggest publisher in Egypt",
+                        "shop_type" : "Nearby",
+                        "logo" : {
+                          "url" : "http://stagging.comprando.io/uploads/shop/logo/2/index.png"
+                        },
+                        "featured" : true
+                      }
                     } ]
-                  }
+                  }, {
+                    "name" : "Backery",
+                    "id" : 3,
+                    "branches" : [ {
+                      "id" : 2,
+                      "name" : "El Tessien",
+                      "rate" : 5,
+                      "open" : true,
+                      "delivery_time" : null,
+                      "shop" : {
+                        "id" : 3,
+                        "name" : "La Poire",
+                        "description" : "Nice",
+                        "shop_type" : "Nearby",
+                        "logo" : {
+                          "url" : "http://stagging.comprando.io/uploads/shop/logo/3/194173_La_Poire.png"
+                        },
+                        "featured" : true
+                      }
+                    } ]
+                  } ]
                 }
               }
             }
