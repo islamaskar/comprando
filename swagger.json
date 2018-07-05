@@ -1157,7 +1157,7 @@
           }
         },
         "requestBody" : {
-          "description" : "You have to provide some paramters to authenticate, send Email or Mobile and password",
+          "description" : "You have to provide the user's email address to reset his password",
           "required" : true,
           "content" : {
             "application/json" : {
@@ -1166,15 +1166,11 @@
                 "properties" : {
                   "email" : {
                     "type" : "string"
-                  },
-                  "password" : {
-                    "type" : "string"
                   }
                 },
-                "required" : [ "email", "password" ],
+                "required" : [ "email" ],
                 "example" : {
-                  "email" : "islam.askar@gmail.com",
-                  "password" : "123456"
+                  "email" : "islam.askar@gmail.com"
                 }
               }
             }
