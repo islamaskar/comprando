@@ -83,10 +83,7 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "string"
-                      }
+                      "type" : "array"
                     }
                   },
                   "example" : {
@@ -182,10 +179,7 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "string"
-                      }
+                      "type" : "array"
                     }
                   },
                   "example" : {
@@ -304,10 +298,7 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "string"
-                      }
+                      "type" : "array"
                     }
                   },
                   "example" : {
@@ -344,10 +335,7 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "string"
-                      }
+                      "type" : "array"
                     }
                   },
                   "example" : {
@@ -461,10 +449,7 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "string"
-                      }
+                      "type" : "array"
                     }
                   },
                   "example" : {
@@ -1125,6 +1110,54 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/password" : {
+      "post" : {
+        "summary" : "Forget password instructions",
+        "description" : "Send forget password instructions to the user's email address\n",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found (sent email address not found)",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "Send the user's email address to get instructions to change his password",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "email" ],
+                "example" : {
+                  "email" : "islam.askar@gmail.com"
                 }
               }
             }
