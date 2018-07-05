@@ -1117,35 +1117,60 @@
         }
       }
     },
-    "/users/password" : {
+    "/reset-password" : {
       "post" : {
         "summary" : "Forget password instructions",
         "description" : "Send forget password instructions to the user's email address\n",
-        "security" : [ ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  },
+                  "example" : {
+                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar",
+                      "mobile" : "01111100956",
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      },
+                      "mobile_verified" : false
+                    }
+                  }
                 }
               }
             }
           },
-          "404" : {
-            "description" : "Not Found (sent email address not found)",
+          "401" : {
+            "description" : "Unauthorized",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "errors" : [ "Invalid Email/Mobile or Password" ]
+                  }
                 }
               }
             }
           }
         },
         "requestBody" : {
-          "description" : "Send the user's email address to get instructions to change his password",
+          "description" : "You have to provide some paramters to authenticate, send Email or Mobile and password",
           "required" : true,
           "content" : {
             "application/json" : {
@@ -1154,11 +1179,15 @@
                 "properties" : {
                   "email" : {
                     "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
                   }
                 },
-                "required" : [ "email" ],
+                "required" : [ "email", "password" ],
                 "example" : {
-                  "email" : "islam.askar@gmail.com"
+                  "email" : "islam.askar@gmail.com",
+                  "password" : "123456"
                 }
               }
             }
