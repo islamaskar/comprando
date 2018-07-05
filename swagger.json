@@ -83,7 +83,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -179,7 +182,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -298,7 +304,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -335,7 +344,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -449,7 +461,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -1127,24 +1142,81 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : {
+                    "auth_token" : {
+                      "type" : "string"
+                    },
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        },
+                        "mobile" : {
+                          "type" : "string"
+                        },
+                        "avatar" : {
+                          "type" : "object",
+                          "properties" : {
+                            "url" : {
+                              "type" : "string"
+                            }
+                          }
+                        },
+                        "mobile_verified" : {
+                          "type" : "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar",
+                      "mobile" : "01111100956",
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      },
+                      "mobile_verified" : false
+                    }
+                  }
                 }
               }
             }
           },
-          "404" : {
-            "description" : "Not Found (sent email address not found)",
+          "401" : {
+            "description" : "Unauthorized",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  },
+                  "example" : {
+                    "errors" : [ "Invalid Email/Mobile or Password" ]
+                  }
                 }
               }
             }
           }
         },
         "requestBody" : {
-          "description" : "Send the user's email address to get instructions to change his password",
+          "description" : "You have to provide some paramters to authenticate, send Email or Mobile and password",
           "required" : true,
           "content" : {
             "application/json" : {
@@ -1153,11 +1225,15 @@
                 "properties" : {
                   "email" : {
                     "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
                   }
                 },
-                "required" : [ "email" ],
+                "required" : [ "email", "password" ],
                 "example" : {
-                  "email" : "islam.askar@gmail.com"
+                  "email" : "islam.askar@gmail.com",
+                  "password" : "123456"
                 }
               }
             }
