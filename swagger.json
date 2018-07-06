@@ -64,7 +64,7 @@
                       "id" : 1,
                       "email" : "islam.askar@gmail.com",
                       "full_name" : "Islam Askar",
-                      "mobile" : "01111100956",
+                      "mobile" : 1.111100956E9,
                       "avatar" : {
                         "url" : "/uploads/user/avatar/6/avatar.jpeg"
                       },
@@ -83,7 +83,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -160,7 +163,7 @@
                       "id" : 1,
                       "email" : "islam.askar@gmail.com",
                       "full_name" : "Islam Askar",
-                      "mobile" : "01111100956",
+                      "mobile" : 1.111100956E9,
                       "avatar" : {
                         "url" : "/uploads/user/avatar/6/avatar.jpeg"
                       },
@@ -179,7 +182,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -239,7 +245,7 @@
                 "example" : {
                   "user" : {
                     "full_name" : "Islam Askar",
-                    "mobile" : "01111100956",
+                    "mobile" : 1.111100956E9,
                     "email" : "islam.askar@gmail.com",
                     "password" : "123456",
                     "avatar" : "data:image/jpeg;base64,/9j/4AAQ....",
@@ -298,7 +304,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -335,7 +344,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
@@ -386,7 +398,7 @@
                 "example" : {
                   "user" : {
                     "full_name" : "Islam Askar",
-                    "mobile" : "01111100956",
+                    "mobile" : 1.111100956E9,
                     "email" : "islam.askar@gmail.com",
                     "password" : "123456",
                     "avatar" : "data:image/jpeg;base64,/9j/4AAQ...."
@@ -449,7 +461,10 @@
                   "type" : "object",
                   "properties" : {
                     "erros" : {
-                      "type" : "array"
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
                     }
                   },
                   "example" : {
