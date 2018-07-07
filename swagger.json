@@ -1,3 +1,1665 @@
 {
-  "swagger" : "2.0"
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "Comprando.io API V1",
+    "url" : "http://api.comprando.io/v1/"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/Comprando3/Comprando/1.0.0"
+  } ],
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "Comprando API V1",
+    "description" : "This is the first version of the API used for the  **mobile clients** (*iOS and Andriod*). It will focus on the buyer's operations.  Visit [http://comprando.io/](http://comprando.io/). Jira [http://jira.comprando.io/](http://jira.comprando.io/), Documentation and Wiki [http://docs.comprando.io](http://docs.comprando.io), API Documentation [http://apidocs.comprando.io/](http://apidocs.comprando.io/) and the Stagging server [http://stagging.comprando.io/](http://stagging.comprando.io/)."
+  },
+  "paths" : {
+    "/authenticate" : {
+      "post" : {
+        "summary" : "Authenticate user and get JWT",
+        "description" : "This is the entry point for the API you have to get the JSON Web Token to access the rest of API resources.\n",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "auth_token" : {
+                      "type" : "string"
+                    },
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        },
+                        "mobile" : {
+                          "type" : "string"
+                        },
+                        "avatar" : {
+                          "type" : "object",
+                          "properties" : {
+                            "url" : {
+                              "type" : "string"
+                            }
+                          }
+                        },
+                        "mobile_verified" : {
+                          "type" : "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar",
+                      "mobile" : 1.111100956E9,
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      },
+                      "mobile_verified" : false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  },
+                  "example" : {
+                    "errors" : [ "Invalid Email/Mobile or Password" ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "You have to provide some paramters to authenticate, send Email or Mobile and password",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "email", "password" ],
+                "example" : {
+                  "email" : "islam.askar@gmail.com",
+                  "password" : "123456"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/register" : {
+      "post" : {
+        "summary" : "Register user to the system",
+        "description" : "Add a user to the system\n",
+        "security" : [ ],
+        "responses" : {
+          "201" : {
+            "description" : "Entity Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "auth_token" : {
+                      "type" : "string"
+                    },
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        },
+                        "mobile_verified" : {
+                          "type" : "boolean"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar",
+                      "mobile" : 1.111100956E9,
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      },
+                      "mobile_verified" : false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  },
+                  "example" : {
+                    "email" : [ "has already been taken" ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "To register send the following Full name, Email, Mobile, Password and Avatar as base64 string",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "user" : {
+                    "type" : "object",
+                    "properties" : {
+                      "full_name" : {
+                        "type" : "string"
+                      },
+                      "mobile" : {
+                        "type" : "string"
+                      },
+                      "email" : {
+                        "type" : "string"
+                      },
+                      "password" : {
+                        "type" : "string"
+                      },
+                      "avatar" : {
+                        "type" : "string",
+                        "format" : "byte"
+                      },
+                      "provider" : {
+                        "type" : "string",
+                        "enum" : [ "google_oauth2", "facebook_oauth2" ]
+                      },
+                      "uid" : {
+                        "type" : "string",
+                        "description" : "Facebook Client ID / Google ID"
+                      },
+                      "country_id" : {
+                        "type" : "integer"
+                      },
+                      "verification_method" : {
+                        "type" : "string",
+                        "enum" : [ "call", "sms" ]
+                      }
+                    },
+                    "required" : [ "email", "password", "mobile", "verification_method", "country_id" ]
+                  }
+                },
+                "example" : {
+                  "user" : {
+                    "full_name" : "Islam Askar",
+                    "mobile" : 1.111100956E9,
+                    "email" : "islam.askar@gmail.com",
+                    "password" : "123456",
+                    "avatar" : "data:image/jpeg;base64,/9j/4AAQ....",
+                    "provider" : "google_oauth2",
+                    "uid" : "1488792969",
+                    "verification_method" : "call",
+                    "country_id" : 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobile/verify" : {
+      "post" : {
+        "summary" : "Verify the mobile number with the code sent",
+        "description" : "Send verification code to Twilio to complete the verification process",
+        "requestBody" : {
+          "description" : "send the verification code in the body",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "verification_code" : {
+                    "type" : "string"
+                  }
+                },
+                "example" : {
+                  "verification_code" : "1576"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Ok, Phone verified",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "Mobile is successfully verified!"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  },
+                  "example" : {
+                    "message" : [ "Wrong verification code" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobile/resend" : {
+      "post" : {
+        "summary" : "Resend the verification code",
+        "description" : "Resend the verification code again to the registered user mobile",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "New SMS sent!"
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  },
+                  "example" : {
+                    "message" : [ "invalid country_code" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile" : {
+      "patch" : {
+        "summary" : "Edit logged in user profile",
+        "description" : "Update the user info",
+        "requestBody" : {
+          "description" : "To register send the following Full name, Email, Mobile, Password and Avatar as base64 string",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "user" : {
+                    "type" : "object",
+                    "properties" : {
+                      "full_name" : {
+                        "type" : "string"
+                      },
+                      "mobile" : {
+                        "type" : "string"
+                      },
+                      "email" : {
+                        "type" : "string"
+                      },
+                      "password" : {
+                        "type" : "string"
+                      },
+                      "avatar" : {
+                        "type" : "string",
+                        "format" : "byte"
+                      }
+                    },
+                    "required" : [ "email", "password", "mobile" ]
+                  }
+                },
+                "example" : {
+                  "user" : {
+                    "full_name" : "Islam Askar",
+                    "mobile" : 1.111100956E9,
+                    "email" : "islam.askar@gmail.com",
+                    "password" : "123456",
+                    "avatar" : "data:image/jpeg;base64,/9j/4AAQ...."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User data updated successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "user" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "email" : {
+                          "type" : "string"
+                        },
+                        "full_name" : {
+                          "type" : "string"
+                        },
+                        "mobile" : {
+                          "type" : "string"
+                        },
+                        "country_id" : {
+                          "type" : "integer"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "user" : {
+                      "id" : 1,
+                      "email" : "islam.askar@gmail.com",
+                      "full_name" : "Islam Askar",
+                      "mobile" : "1111100956",
+                      "avatar" : {
+                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
+                      },
+                      "mobile_verified" : true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    }
+                  },
+                  "example" : {
+                    "email" : [ "has already been taken" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/countries" : {
+      "get" : {
+        "summary" : "List all supported countries",
+        "description" : "Return all the supported countries with country code and the flag",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the countries",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "countries" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "country_code" : {
+                            "type" : "string"
+                          },
+                          "flag" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "countries" : [ {
+                      "id" : 1,
+                      "name" : "Egypt",
+                      "country_code" : "20",
+                      "flag" : {
+                        "url" : "/uploads/country/flag/1/rsz_flag_of_egypt_variant.png"
+                      }
+                    }, {
+                      "id" : 2,
+                      "name" : "KSA",
+                      "country_code" : "966",
+                      "flag" : {
+                        "url" : null
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cities" : {
+      "get" : {
+        "summary" : "List all cities for offshore",
+        "description" : "Return all cities",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the cities",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cities" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "cities" : [ {
+                      "id" : 1,
+                      "name" : "Cairo"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/regions" : {
+      "get" : {
+        "summary" : "List all regions for nearby",
+        "description" : "Return all regions based on country or city parameterse",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "country_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the country to filter with"
+        }, {
+          "name" : "city_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the city to filter with"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the regions",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cities" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "regions" : [ {
+                      "id" : 1,
+                      "name" : "New Cairo"
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories" : {
+      "get" : {
+        "summary" : "List shops categories",
+        "description" : "Return all the shop categories",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list of shops categories",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "categories" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "description" : {
+                            "type" : "string"
+                          },
+                          "image" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "categories" : [ {
+                      "id" : 1,
+                      "name" : "Bakery",
+                      "description" : "Test Desc",
+                      "image" : {
+                        "url" : "/uploads/category/image/1/image1.jpg"
+                      }
+                    }, {
+                      "id" : 3,
+                      "name" : "Clothes",
+                      "description" : "Test Desc",
+                      "image" : {
+                        "url" : "/uploads/category/image/3/image3.jpg"
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops" : {
+      "get" : {
+        "summary" : "List nearby/offshore shops based on parameters",
+        "description" : "List nearby/offshore shops based on parameters",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "shop_type",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "Determine the type of the desired shops ( nearby / offshore )"
+        }, {
+          "name" : "shop_name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "Specifies shop name to search with"
+        }, {
+          "name" : "category_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies category id to filter shops"
+        }, {
+          "name" : "city_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the city to search in"
+        }, {
+          "name" : "region_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the region to search in"
+        }, {
+          "name" : "sort_by",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "filter by (rate,delivery_time,most_popular,recommended)"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list of shops",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "branches" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "id" : {
+                              "type" : "integer"
+                            },
+                            "name" : {
+                              "type" : "string"
+                            },
+                            "open" : {
+                              "type" : "boolean"
+                            },
+                            "rate" : {
+                              "type" : "integer"
+                            },
+                            "delivery_time" : {
+                              "type" : "string"
+                            },
+                            "shop" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : {
+                                  "type" : "integer"
+                                },
+                                "name" : {
+                                  "type" : "string"
+                                },
+                                "description" : {
+                                  "type" : "string"
+                                },
+                                "shop_type" : {
+                                  "type" : "string"
+                                },
+                                "logo" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "url" : {
+                                      "type" : "string"
+                                    }
+                                  }
+                                },
+                                "featured" : {
+                                  "type" : "boolean"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : [ {
+                    "name" : "Bookstores",
+                    "id" : 1,
+                    "branches" : [ {
+                      "id" : 1,
+                      "name" : "Downtwon branch",
+                      "rate" : 5,
+                      "open" : false,
+                      "delivery_time" : null,
+                      "shop" : {
+                        "id" : 1,
+                        "name" : "Alef",
+                        "description" : "One of biggest bookstores in Egypt",
+                        "shop_type" : "Nearby",
+                        "logo" : {
+                          "url" : "http://stagging.comprando.io/uploads/shop/logo/1/ALEF-bookstores-logo.png"
+                        },
+                        "featured" : false
+                      }
+                    }, {
+                      "id" : 3,
+                      "name" : "Down twon",
+                      "rate" : 5,
+                      "open" : false,
+                      "delivery_time" : null,
+                      "shop" : {
+                        "id" : 2,
+                        "name" : "Dar Alshrouq",
+                        "description" : "Biggest publisher in Egypt",
+                        "shop_type" : "Nearby",
+                        "logo" : {
+                          "url" : "http://stagging.comprando.io/uploads/shop/logo/2/index.png"
+                        },
+                        "featured" : true
+                      }
+                    } ]
+                  }, {
+                    "name" : "Backery",
+                    "id" : 3,
+                    "branches" : [ {
+                      "id" : 2,
+                      "name" : "El Tessien",
+                      "rate" : 5,
+                      "open" : true,
+                      "delivery_time" : null,
+                      "shop" : {
+                        "id" : 3,
+                        "name" : "La Poire",
+                        "description" : "Nice",
+                        "shop_type" : "Nearby",
+                        "logo" : {
+                          "url" : "http://stagging.comprando.io/uploads/shop/logo/3/194173_La_Poire.png"
+                        },
+                        "featured" : true
+                      }
+                    } ]
+                  } ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/featured" : {
+      "get" : {
+        "summary" : "List all featured shops for the slider",
+        "description" : "Return all featured shops optianly on category_id",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "category_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the category to filter with"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the shops",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "shops" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "featured_image" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          },
+                          "logo" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "shops" : [ {
+                      "id" : 1,
+                      "name" : "Alef",
+                      "featured_image" : {
+                        "url" : "http://stagging.comprando.io/uploads/shop/featured_image/1/20160918182926_26945_oZH.jpg"
+                      },
+                      "logo" : {
+                        "url" : "http://stagging.comprando.io/uploads/shop/logo/1/alef.jpg"
+                      }
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/{shop_id}/products" : {
+      "get" : {
+        "summary" : "List shop products",
+        "description" : "List shop products with their categories",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The shop id which the products belong to"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list of shop products",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "categories" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "name" : {
+                            "type" : "string"
+                          },
+                          "products" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : {
+                                  "type" : "integer"
+                                },
+                                "name" : {
+                                  "type" : "string"
+                                },
+                                "description" : {
+                                  "type" : "string"
+                                },
+                                "price" : {
+                                  "type" : "number",
+                                  "format" : "float"
+                                },
+                                "images" : {
+                                  "type" : "array",
+                                  "items" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                      "url" : {
+                                        "type" : "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "categories" : [ {
+                      "name" : "Dessert",
+                      "products" : [ {
+                        "id" : 10,
+                        "name" : "Macaroons",
+                        "description" : "Box of 7 Macaroons",
+                        "price" : 56,
+                        "images" : [ {
+                          "url" : "/uploads/product/images/10/1.png"
+                        }, {
+                          "url" : "/uploads/product/images/10/2.png"
+                        } ]
+                      }, {
+                        "id" : 1,
+                        "name" : "new",
+                        "description" : "test",
+                        "price" : 18,
+                        "images" : [ {
+                          "url" : "/uploads/product/images/1/3.png"
+                        } ]
+                      } ]
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shops/{shop_id}/products/{product_id}" : {
+      "get" : {
+        "summary" : "View prodct details",
+        "description" : "View prodct details with its category",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The shop id which the product belongs to"
+        }, {
+          "in" : "path",
+          "name" : "product_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The product id which will be displayed"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned an object of product contains the product details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "product" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "name" : {
+                          "type" : "string"
+                        },
+                        "description" : {
+                          "type" : "string"
+                        },
+                        "price" : {
+                          "type" : "number",
+                          "format" : "float"
+                        },
+                        "images" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "product" : {
+                      "id" : 10,
+                      "name" : "Macaroons",
+                      "description" : "Box of 7 Macaroons",
+                      "price" : 56,
+                      "images" : [ {
+                        "url" : "/uploads/product/images/10/1.png"
+                      }, {
+                        "url" : "/uploads/product/images/10/2.png"
+                      } ],
+                      "category" : {
+                        "name" : "Dessert"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reset-password" : {
+      "post" : {
+        "summary" : "Forget password instructions",
+        "description" : "Send forget password instructions to the user's email address\n",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string",
+                      "example" : "An email has been sent to your email, please follow the instructions"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string",
+                      "example" : "Sorry, this email is invalid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "You have to provide the user's email address to reset his password",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "email" ],
+                "example" : {
+                  "email" : "islam.askar@gmail.com"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders" : {
+      "post" : {
+        "summary" : "Create order",
+        "description" : "Current user create his own order",
+        "requestBody" : {
+          "description" : "To create order send the following paramaters",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "order" : {
+                    "type" : "object",
+                    "properties" : {
+                      "address" : {
+                        "type" : "string"
+                      },
+                      "payment_method_id" : {
+                        "type" : "integer"
+                      },
+                      "shop_order_attributes" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "id" : "integer",
+                            "variant_id" : "integer"
+                          }
+                        }
+                      }
+                    },
+                    "required" : [ "payment_method_id", "address", "shop_order_attributes", "variant_id", "id" ]
+                  }
+                },
+                "example" : {
+                  "order" : {
+                    "address" : "test address",
+                    "payment_method_id" : 1,
+                    "shop_order_attributes" : {
+                      "variant_id" : 1,
+                      "id" : 8
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Order created successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "schema" : {
+                    "type" : "object",
+                    "properties" : {
+                      "order" : {
+                        "type" : "object",
+                        "properties" : {
+                          "address" : {
+                            "type" : "string"
+                          },
+                          "payment_method_id" : {
+                            "type" : "integer"
+                          },
+                          "shop_order_attributes" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : "integer",
+                                "variant_id" : "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "order" : {
+                      "address" : "test address",
+                      "payment_method_id" : 1,
+                      "shop_order_attributes" : {
+                        "variant_id" : 1,
+                        "id" : 8
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "user" : [ "you must login" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}" : {
+      "get" : {
+        "summary" : "show cart",
+        "description" : "return cart and its items",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "cart id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the cart",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cart" : {
+                      "type" : "object",
+                      "properties" : {
+                        "cart_items" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "properties" : {
+                              "variant_id" : "integer",
+                              "quantity" : "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "cart" : {
+                      "cart_items" : {
+                        "variant_id" : 1,
+                        "quantity" : 8
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cart_items" : {
+      "post" : {
+        "summary" : "Add Items To Cart",
+        "description" : "Current user add his items to cart",
+        "requestBody" : {
+          "description" : "To create cart send the following paramaters",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "cart" : {
+                    "type" : "object",
+                    "properties" : {
+                      "cart_item" : {
+                        "type" : "object",
+                        "properties" : {
+                          "variant_id" : "integer",
+                          "quantity" : "integer"
+                        }
+                      }
+                    },
+                    "required" : [ "variant_id", "quantity" ]
+                  }
+                },
+                "example" : {
+                  "cart" : {
+                    "cart_items" : {
+                      "variant_id" : 1,
+                      "quantity" : 8
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Item added successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cart" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "user_id" : {
+                          "type" : "integer"
+                        },
+                        "cart_item" : {
+                          "type" : "object",
+                          "properties" : {
+                            "variant_id" : "integer",
+                            "quantity" : "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "cart" : {
+                      "id" : 1,
+                      "user_id" : 1,
+                      "cart_items" : {
+                        "variant_id" : 1,
+                        "quantity" : 8
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "user" : [ "you must login" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "summary" : "Update Items in Cart",
+        "description" : "Current user update his items to cart",
+        "requestBody" : {
+          "description" : "To update cart send the following paramaters",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "cart_item" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : "integer",
+                      "variant_id" : "integer",
+                      "quantity" : "integer"
+                    }
+                  }
+                },
+                "required" : [ "id", "variant_id", "quantity" ],
+                "example" : {
+                  "id" : 1,
+                  "cart_item" : {
+                    "variant_id" : 1,
+                    "quantity" : 8
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Item added successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cart" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "user_id" : {
+                          "type" : "integer"
+                        },
+                        "cart_item" : {
+                          "type" : "object",
+                          "properties" : {
+                            "id" : "integer",
+                            "variant_id" : "integer",
+                            "quantity" : "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "id" : 1,
+                    "cart_item" : {
+                      "variant_id" : 1,
+                      "quantity" : 8
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "user" : [ "you must login" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete Item in Cart",
+        "description" : "Current user delete his items to cart",
+        "requestBody" : {
+          "description" : "To update cart send the following paramaters",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "cart_item" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : "integer"
+                    }
+                  }
+                },
+                "required" : [ "id" ]
+              },
+              "example" : {
+                "id" : 1
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Item deleted successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "cart" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "id" : 1
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array"
+                    }
+                  },
+                  "example" : {
+                    "user" : [ "you must login" ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "User" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "full_name" : {
+            "type" : "string"
+          },
+          "avatar" : {
+            "type" : "object",
+            "properties" : {
+              "url" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  },
+  "security" : [ {
+    "bearerAuth" : [ ]
+  }, {
+    "accessCode" : [ "read", "write" ]
+  } ]
 }
