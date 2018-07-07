@@ -1622,6 +1622,77 @@
           }
         }
       }
+    },
+    "/cart_items/checkout" : {
+      "get" : {
+        "summary" : "List user cart items",
+        "description" : "List user cart items",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list of product",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "address" : "string",
+                    "shopes" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : "integer",
+                          "name" : "string",
+                          "delivery_time" : "string",
+                          "logo" : "string",
+                          "products" : {
+                            "type" : "array",
+                            "properties" : {
+                              "id" : "integer",
+                              "product_id" : "integer",
+                              "price" : "integer",
+                              "description" : "string",
+                              "name" : "string",
+                              "quantity" : "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "checkout" : {
+                      "shops" : [ {
+                        "id" : 1,
+                        "name" : "Alef",
+                        "logo" : null,
+                        "delivery_time" : null,
+                        "products" : [ {
+                          "id" : 4,
+                          "name" : null,
+                          "variant_id" : 1,
+                          "price" : 500,
+                          "description" : "aa",
+                          "quantity" : 2
+                        }, {
+                          "id" : 1,
+                          "name" : null,
+                          "variant_id" : 2,
+                          "price" : 600,
+                          "description" : "test",
+                          "quantity" : 2
+                        } ]
+                      } ],
+                      "address" : "sdakdnaskndkan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
