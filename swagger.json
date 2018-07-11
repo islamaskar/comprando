@@ -1196,51 +1196,6 @@
       "post" : {
         "summary" : "Create order",
         "description" : "Current user create his own order",
-        "requestBody" : {
-          "description" : "To create order send the following paramaters",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "type" : "object",
-                "properties" : {
-                  "order" : {
-                    "type" : "object",
-                    "properties" : {
-                      "address" : {
-                        "type" : "string"
-                      },
-                      "payment_method_id" : {
-                        "type" : "integer"
-                      },
-                      "shop_order_attributes" : {
-                        "type" : "array",
-                        "items" : {
-                          "type" : "object",
-                          "properties" : {
-                            "id" : "integer",
-                            "variant_id" : "integer"
-                          }
-                        }
-                      }
-                    },
-                    "required" : [ "payment_method_id", "address", "shop_order_attributes", "variant_id", "id" ]
-                  }
-                },
-                "example" : {
-                  "order" : {
-                    "address" : "test address",
-                    "payment_method_id" : 1,
-                    "shop_order_attributes" : {
-                      "variant_id" : 1,
-                      "id" : 8
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses" : {
           "200" : {
             "description" : "Order created successfully",
@@ -1285,21 +1240,67 @@
                   }
                 }
               }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "erros" : {
-                      "type" : "array"
+            },
+            "422" : {
+              "description" : "Unprocessable Entity",
+              "content" : {
+                "application/json" : {
+                  "schema" : {
+                    "type" : "object",
+                    "properties" : {
+                      "erros" : {
+                        "type" : "array",
+                        "items" : null
+                      }
+                    },
+                    "example" : {
+                      "user" : [ "you must login" ]
                     }
-                  },
-                  "example" : {
-                    "user" : [ "you must login" ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "To create order send the following paramaters",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "order" : {
+                    "type" : "object",
+                    "properties" : {
+                      "address" : {
+                        "type" : "string"
+                      },
+                      "payment_method_id" : {
+                        "type" : "integer"
+                      },
+                      "shop_order_attributes" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "id" : "integer",
+                            "variant_id" : "integer"
+                          }
+                        }
+                      }
+                    },
+                    "required" : [ "payment_method_id", "address", "shop_order_attributes", "variant_id", "id" ]
+                  }
+                },
+                "example" : {
+                  "order" : {
+                    "address" : "test address",
+                    "payment_method_id" : 1,
+                    "shop_order_attributes" : {
+                      "variant_id" : 1,
+                      "id" : 8
+                    }
                   }
                 }
               }
