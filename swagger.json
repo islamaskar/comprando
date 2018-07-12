@@ -656,51 +656,44 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "categories" : {
-                      "type" : "array",
-                      "items" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "description" : {
+                        "type" : "string"
+                      },
+                      "image" : {
                         "type" : "object",
                         "properties" : {
-                          "id" : {
-                            "type" : "integer"
-                          },
-                          "name" : {
+                          "url" : {
                             "type" : "string"
-                          },
-                          "description" : {
-                            "type" : "string"
-                          },
-                          "image" : {
-                            "type" : "object",
-                            "properties" : {
-                              "url" : {
-                                "type" : "string"
-                              }
-                            }
                           }
                         }
                       }
                     }
                   },
-                  "example" : {
-                    "categories" : [ {
-                      "id" : 1,
-                      "name" : "Bakery",
-                      "description" : "Test Desc",
-                      "image" : {
-                        "url" : "/uploads/category/image/1/image1.jpg"
-                      }
-                    }, {
-                      "id" : 3,
-                      "name" : "Clothes",
-                      "description" : "Test Desc",
-                      "image" : {
-                        "url" : "/uploads/category/image/3/image3.jpg"
-                      }
-                    } ]
-                  }
+                  "example" : [ {
+                    "id" : 1,
+                    "name" : "Bakery",
+                    "description" : "Test Desc",
+                    "image" : {
+                      "url" : "/uploads/category/image/1/image1.jpg"
+                    }
+                  }, {
+                    "id" : 3,
+                    "name" : "Clothes",
+                    "description" : "Test Desc",
+                    "image" : {
+                      "url" : "/uploads/category/image/3/image3.jpg"
+                    }
+                  } ]
                 }
               }
             }
