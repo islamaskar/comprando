@@ -642,6 +642,14 @@
         "summary" : "List shops categories",
         "description" : "Return all the shop categories",
         "security" : [ ],
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "category_type",
+          "description" : "Pass the category type it's either {shop} OR {product}, if not passed the default will be {shop}",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "Successfully returned a list of shops categories",
