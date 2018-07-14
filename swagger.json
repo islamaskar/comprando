@@ -1132,6 +1132,85 @@
         }
       }
     },
+    "/shops/{shop_id}/products/{product_id}/variants" : {
+      "get" : {
+        "summary" : "List product variants",
+        "description" : "Get the product variants with the parent product object",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The shop id which the product belongs to"
+        }, {
+          "in" : "path",
+          "name" : "product_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The product id which will you get its variants"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned an object of product contains the product details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "product" : {
+                      "type" : "object",
+                      "properties" : {
+                        "id" : {
+                          "type" : "integer"
+                        },
+                        "name" : {
+                          "type" : "string"
+                        },
+                        "variants" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "properties" : {
+                              "id" : {
+                                "type" : "integer"
+                              },
+                              "name" : {
+                                "type" : "string"
+                              },
+                              "price" : {
+                                "type" : "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "id" : 1,
+                    "name" : "Davinci's code",
+                    "variants" : [ {
+                      "id" : 1,
+                      "name" : "paperover",
+                      "price" : 30
+                    }, {
+                      "id" : 4,
+                      "name" : "hardcover",
+                      "price" : 50
+                    } ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/reset-password" : {
       "post" : {
         "summary" : "Forget password instructions",
