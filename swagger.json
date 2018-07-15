@@ -1091,10 +1091,6 @@
                         "description" : {
                           "type" : "string"
                         },
-                        "price" : {
-                          "type" : "number",
-                          "format" : "float"
-                        },
                         "images" : {
                           "type" : "array",
                           "items" : {
@@ -1105,25 +1101,41 @@
                               }
                             }
                           }
+                        },
+                        "variants" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "properties" : {
+                              "id" : {
+                                "type" : "integer"
+                              },
+                              "name" : {
+                                "type" : "string"
+                              },
+                              "price" : {
+                                "type" : "float"
+                              }
+                            }
+                          }
                         }
                       }
                     }
                   },
                   "example" : {
-                    "product" : {
-                      "id" : 10,
-                      "name" : "Macaroons",
-                      "description" : "Box of 7 Macaroons",
-                      "price" : 56,
-                      "images" : [ {
-                        "url" : "/uploads/product/images/10/1.png"
-                      }, {
-                        "url" : "/uploads/product/images/10/2.png"
-                      } ],
-                      "category" : {
-                        "name" : "Dessert"
-                      }
-                    }
+                    "id" : 1,
+                    "name" : "Davinci's code",
+                    "description" : "one of the best books",
+                    "images" : [ ],
+                    "variants" : [ {
+                      "id" : 1,
+                      "name" : "paperover",
+                      "price" : 30
+                    }, {
+                      "id" : 4,
+                      "name" : "hardcover",
+                      "price" : 50
+                    } ]
                   }
                 }
               }
