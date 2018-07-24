@@ -1880,6 +1880,44 @@
           }
         }
       }
+    },
+    "/promocode/check" : {
+      "get" : {
+        "summary" : "check validity of a promocode",
+        "description" : "check validity of the promocode sent in query params",
+        "parameters" : [ {
+          "in" : "query",
+          "name" : "promocode",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The promo code to check it's validity"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "is_valid" : {
+                      "type" : "boolean"
+                    },
+                    "message" : {
+                      "type" : "string"
+                    }
+                  },
+                  "example" : {
+                    "is_valid" : true,
+                    "message" : "This promo-code is valid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
