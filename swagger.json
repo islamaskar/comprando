@@ -291,7 +291,9 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object",
-                  "example" : "Mobile is successfully verified!"
+                  "example" : {
+                    "message" : "Mobile is successfully verified!"
+                  }
                 }
               }
             }
@@ -321,7 +323,7 @@
       }
     },
     "/mobile/resend" : {
-      "post" : {
+      "get" : {
         "summary" : "Resend the verification code",
         "description" : "Resend the verification code again to the registered user mobile",
         "responses" : {
@@ -331,7 +333,9 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object",
-                  "example" : "New SMS sent!"
+                  "example" : {
+                    "message" : "New SMS sent!"
+                  }
                 }
               }
             }
@@ -882,6 +886,99 @@
         }
       }
     },
+    "/shops/{shop_id}/branches/{id}" : {
+      "get" : {
+        "summary" : "List all featured shops for the slider",
+        "description" : "Return all featured shops optianly on category_id",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the shop"
+        }, {
+          "in" : "path",
+          "name" : "id",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          },
+          "description" : "Specifies the id of the branch"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned the shop details",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "id" : {
+                      "type" : "integer"
+                    },
+                    "shop_name" : {
+                      "type" : "string"
+                    },
+                    "name" : {
+                      "type" : "string"
+                    },
+                    "open_at" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    },
+                    "close_at" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    },
+                    "rate" : {
+                      "type" : "integer"
+                    },
+                    "cover_image" : {
+                      "type" : "object",
+                      "properties" : {
+                        "url" : {
+                          "type" : "string"
+                        }
+                      }
+                    },
+                    "logo" : {
+                      "type" : "object",
+                      "properties" : {
+                        "url" : {
+                          "type" : "string"
+                        }
+                      }
+                    }
+                  },
+                  "example" : {
+                    "id" : 1,
+                    "shop_name" : "Alef",
+                    "name" : "Downtwon branch",
+                    "open_at" : [ "10 am" ],
+                    "close_at" : [ "10 pm" ],
+                    "rate" : 5,
+                    "delivery_time" : null,
+                    "cover_image" : {
+                      "url" : null
+                    },
+                    "logo" : {
+                      "url" : null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/shops/featured" : {
       "get" : {
         "summary" : "List all featured shops for the slider",
@@ -1049,7 +1146,7 @@
         }
       }
     },
-    "/shops/{shop_id}/products/{product_id}" : {
+    "/shops/{shop_id}/products/{id}" : {
       "get" : {
         "summary" : "View prodct details",
         "description" : "View prodct details with its category",
@@ -1057,14 +1154,14 @@
         "parameters" : [ {
           "in" : "path",
           "name" : "shop_id",
+          "required" : true,
           "schema" : {
             "type" : "integer"
           },
-          "required" : true,
           "description" : "The shop id which the product belongs to"
         }, {
           "in" : "path",
-          "name" : "product_id",
+          "name" : "id",
           "schema" : {
             "type" : "integer"
           },
@@ -1114,7 +1211,7 @@
                                 "type" : "string"
                               },
                               "price" : {
-                                "type" : "float"
+                                "type" : "number"
                               }
                             }
                           }
@@ -1294,26 +1391,24 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "schema" : {
-                    "type" : "object",
-                    "properties" : {
-                      "order" : {
-                        "type" : "object",
-                        "properties" : {
-                          "address" : {
-                            "type" : "string"
-                          },
-                          "payment_method_id" : {
-                            "type" : "integer"
-                          },
-                          "shop_order_attributes" : {
-                            "type" : "array",
-                            "items" : {
-                              "type" : "object",
-                              "properties" : {
-                                "id" : "integer",
-                                "variant_id" : "integer"
-                              }
+                  "type" : "object",
+                  "properties" : {
+                    "order" : {
+                      "type" : "object",
+                      "properties" : {
+                        "address" : {
+                          "type" : "string"
+                        },
+                        "payment_method_id" : {
+                          "type" : "integer"
+                        },
+                        "shop_order_attributes" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "properties" : {
+                              "id" : "integer",
+                              "variant_id" : "integer"
                             }
                           }
                         }
@@ -1332,22 +1427,22 @@
                   }
                 }
               }
-            },
-            "422" : {
-              "description" : "Unprocessable Entity",
-              "content" : {
-                "application/json" : {
-                  "schema" : {
-                    "type" : "object",
-                    "properties" : {
-                      "erros" : {
-                        "type" : "array",
-                        "items" : null
-                      }
-                    },
-                    "example" : {
-                      "user" : [ "you must login" ]
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "erros" : {
+                      "type" : "array",
+                      "items" : null
                     }
+                  },
+                  "example" : {
+                    "user" : [ "you must login" ]
                   }
                 }
               }
