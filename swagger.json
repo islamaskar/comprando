@@ -479,6 +479,33 @@
             }
           }
         }
+      },
+      "get" : {
+        "summary" : "get profile data",
+        "description" : "returns profile's data of the current user",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "auth_token" : {
+                      "type" : "string"
+                    },
+                    "user" : {
+                      "$ref" : "#/components/schemas/User"
+                    }
+                  },
+                  "example" : {
+                    "$ref" : "#/components/examples/User"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/countries" : {
@@ -1950,6 +1977,21 @@
         "type" : "http",
         "scheme" : "bearer",
         "bearerFormat" : "JWT"
+      }
+    },
+    "examples" : {
+      "User" : {
+        "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
+        "user" : {
+          "id" : 1,
+          "email" : "islam.askar@gmail.com",
+          "full_name" : "Islam Askar",
+          "mobile" : 1.111100956E9,
+          "avatar" : {
+            "url" : "/uploads/user/avatar/6/avatar.jpeg"
+          },
+          "mobile_verified" : false
+        }
       }
     }
   },
