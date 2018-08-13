@@ -9,7 +9,7 @@
   } ],
   "info" : {
     "version" : "1.0.0",
-    "title" : "Comprando API V1",
+    "title" : "Comprando API V",
     "description" : "This is the first version of the API used for the  **mobile clients** (*iOS and Andriod*). It will focus on the buyer's operations.  Visit [http://comprando.io/](http://comprando.io/). Jira [http://jira.comprando.io/](http://jira.comprando.io/), Documentation and Wiki [http://docs.comprando.io](http://docs.comprando.io), API Documentation [http://apidocs.comprando.io/](http://apidocs.comprando.io/) and the Stagging server [http://stagging.comprando.io/](http://stagging.comprando.io/)."
   },
   "paths" : {
@@ -24,53 +24,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "auth_token" : {
-                      "type" : "string"
-                    },
-                    "user" : {
-                      "type" : "object",
-                      "properties" : {
-                        "id" : {
-                          "type" : "integer"
-                        },
-                        "email" : {
-                          "type" : "string"
-                        },
-                        "full_name" : {
-                          "type" : "string"
-                        },
-                        "mobile" : {
-                          "type" : "string"
-                        },
-                        "avatar" : {
-                          "type" : "object",
-                          "properties" : {
-                            "url" : {
-                              "type" : "string"
-                            }
-                          }
-                        },
-                        "mobile_verified" : {
-                          "type" : "boolean"
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
-                    "user" : {
-                      "id" : 1,
-                      "email" : "islam.askar@gmail.com",
-                      "full_name" : "Islam Askar",
-                      "mobile" : 1.111100956E9,
-                      "avatar" : {
-                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
-                      },
-                      "mobile_verified" : false
-                    }
-                  }
+                  "$ref" : "#/components/schemas/User"
                 }
               }
             }
@@ -134,42 +88,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "auth_token" : {
-                      "type" : "string"
-                    },
-                    "user" : {
-                      "type" : "object",
-                      "properties" : {
-                        "id" : {
-                          "type" : "integer"
-                        },
-                        "email" : {
-                          "type" : "string"
-                        },
-                        "full_name" : {
-                          "type" : "string"
-                        },
-                        "mobile_verified" : {
-                          "type" : "boolean"
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
-                    "user" : {
-                      "id" : 1,
-                      "email" : "islam.askar@gmail.com",
-                      "full_name" : "Islam Askar",
-                      "mobile" : 1.111100956E9,
-                      "avatar" : {
-                        "url" : "/uploads/user/avatar/6/avatar.jpeg"
-                      },
-                      "mobile_verified" : false
-                    }
-                  }
+                  "$ref" : "#/components/schemas/User"
                 }
               }
             }
@@ -489,18 +408,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "auth_token" : {
-                      "type" : "string"
-                    },
-                    "user" : {
-                      "$ref" : "#/components/schemas/User"
-                    }
-                  },
-                  "example" : {
-                    "$ref" : "#/components/examples/User"
-                  }
+                  "$ref" : "#/components/schemas/User"
                 }
               }
             }
@@ -1173,6 +1081,107 @@
         }
       }
     },
+    "/shops/{shop_id}/products/{id}/related" : {
+      "get" : {
+        "summary" : "List shop product's related products",
+        "description" : "List shop products with their categories",
+        "security" : [ ],
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The shop id which the products belong to"
+        }, {
+          "in" : "path",
+          "name" : "id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true,
+          "description" : "The product id to find it's related products"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully returned a list related products",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "description" : {
+                        "type" : "string"
+                      },
+                      "images" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "url" : {
+                              "type" : "string"
+                            }
+                          }
+                        }
+                      },
+                      "price" : {
+                        "type" : "number"
+                      },
+                      "master_variant_id" : {
+                        "type" : "integer"
+                      },
+                      "variants" : {
+                        "type" : "array",
+                        "items" : {
+                          "type" : "object",
+                          "properties" : {
+                            "id" : {
+                              "type" : "integer"
+                            },
+                            "name" : {
+                              "type" : "string"
+                            },
+                            "price" : {
+                              "type" : "number"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "example" : {
+                      "id" : 1,
+                      "name" : "Davinci's code",
+                      "description" : "one of the best books",
+                      "images" : [ ],
+                      "price" : 50,
+                      "master_variant_id" : 1,
+                      "variants" : [ {
+                        "id" : 1,
+                        "name" : "paperover",
+                        "price" : 30
+                      }, {
+                        "id" : 4,
+                        "name" : "hardcover",
+                        "price" : 50
+                      } ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/shops/{shop_id}/products/{id}" : {
       "get" : {
         "summary" : "View prodct details",
@@ -1408,506 +1417,6 @@
         }
       }
     },
-    "/orders" : {
-      "post" : {
-        "summary" : "Create order",
-        "description" : "Current user create his own order",
-        "responses" : {
-          "200" : {
-            "description" : "Order created successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "order" : {
-                      "type" : "object",
-                      "properties" : {
-                        "address" : {
-                          "type" : "string"
-                        },
-                        "payment_method_id" : {
-                          "type" : "integer"
-                        },
-                        "shop_order_attributes" : {
-                          "type" : "array",
-                          "items" : {
-                            "type" : "object",
-                            "properties" : {
-                              "id" : "integer",
-                              "variant_id" : "integer"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "order" : {
-                      "address" : "test address",
-                      "payment_method_id" : 1,
-                      "shop_order_attributes" : {
-                        "variant_id" : 1,
-                        "id" : 8
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "erros" : {
-                      "type" : "array",
-                      "items" : null
-                    }
-                  },
-                  "example" : {
-                    "user" : [ "you must login" ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "requestBody" : {
-          "description" : "To create order send the following paramaters",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "type" : "object",
-                "properties" : {
-                  "order" : {
-                    "type" : "object",
-                    "properties" : {
-                      "address" : {
-                        "type" : "string"
-                      },
-                      "payment_method_id" : {
-                        "type" : "integer"
-                      },
-                      "shop_order_attributes" : {
-                        "type" : "array",
-                        "items" : {
-                          "type" : "object",
-                          "properties" : {
-                            "id" : "integer",
-                            "variant_id" : "integer"
-                          }
-                        }
-                      }
-                    },
-                    "required" : [ "payment_method_id", "address", "shop_order_attributes", "variant_id", "id" ]
-                  }
-                },
-                "example" : {
-                  "order" : {
-                    "address" : "test address",
-                    "payment_method_id" : 1,
-                    "shop_order_attributes" : {
-                      "variant_id" : 1,
-                      "id" : 8
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/carts/{id}" : {
-      "get" : {
-        "summary" : "show cart",
-        "description" : "return cart and its items",
-        "security" : [ ],
-        "parameters" : [ {
-          "in" : "path",
-          "name" : "id",
-          "schema" : {
-            "type" : "integer"
-          },
-          "required" : true,
-          "description" : "cart id"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Successfully returned the cart",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "cart" : {
-                      "type" : "object",
-                      "properties" : {
-                        "cart_items" : {
-                          "type" : "array",
-                          "items" : {
-                            "type" : "object",
-                            "properties" : {
-                              "variant_id" : "integer",
-                              "quantity" : "integer"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "cart" : {
-                      "cart_items" : {
-                        "variant_id" : 1,
-                        "quantity" : 8
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/cart_items" : {
-      "post" : {
-        "summary" : "Add Items To Cart",
-        "description" : "Current user add his items to cart",
-        "requestBody" : {
-          "description" : "To create cart send the following paramaters",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "type" : "object",
-                "properties" : {
-                  "cart" : {
-                    "type" : "object",
-                    "properties" : {
-                      "cart_item" : {
-                        "type" : "object",
-                        "properties" : {
-                          "variant_id" : "integer",
-                          "quantity" : "integer"
-                        }
-                      }
-                    },
-                    "required" : [ "variant_id", "quantity" ]
-                  }
-                },
-                "example" : {
-                  "cart" : {
-                    "cart_items" : {
-                      "variant_id" : 1,
-                      "quantity" : 8
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Item added successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "cart" : {
-                      "type" : "object",
-                      "properties" : {
-                        "id" : {
-                          "type" : "integer"
-                        },
-                        "user_id" : {
-                          "type" : "integer"
-                        },
-                        "cart_item" : {
-                          "type" : "object",
-                          "properties" : {
-                            "variant_id" : "integer",
-                            "quantity" : "integer"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "cart" : {
-                      "id" : 1,
-                      "user_id" : 1,
-                      "cart_items" : {
-                        "variant_id" : 1,
-                        "quantity" : 8
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "erros" : {
-                      "type" : "array"
-                    }
-                  },
-                  "example" : {
-                    "user" : [ "you must login" ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch" : {
-        "summary" : "Update Items in Cart",
-        "description" : "Current user update his items to cart",
-        "requestBody" : {
-          "description" : "To update cart send the following paramaters",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "type" : "object",
-                "properties" : {
-                  "cart_item" : {
-                    "type" : "object",
-                    "properties" : {
-                      "id" : "integer",
-                      "variant_id" : "integer",
-                      "quantity" : "integer"
-                    }
-                  }
-                },
-                "required" : [ "id", "variant_id", "quantity" ],
-                "example" : {
-                  "id" : 1,
-                  "cart_item" : {
-                    "variant_id" : 1,
-                    "quantity" : 8
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Item added successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "cart" : {
-                      "type" : "object",
-                      "properties" : {
-                        "id" : {
-                          "type" : "integer"
-                        },
-                        "user_id" : {
-                          "type" : "integer"
-                        },
-                        "cart_item" : {
-                          "type" : "object",
-                          "properties" : {
-                            "id" : "integer",
-                            "variant_id" : "integer",
-                            "quantity" : "integer"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "id" : 1,
-                    "cart_item" : {
-                      "variant_id" : 1,
-                      "quantity" : 8
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "erros" : {
-                      "type" : "array"
-                    }
-                  },
-                  "example" : {
-                    "user" : [ "you must login" ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete" : {
-        "summary" : "delete Item in Cart",
-        "description" : "Current user delete his items to cart",
-        "requestBody" : {
-          "description" : "To update cart send the following paramaters",
-          "required" : true,
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "type" : "object",
-                "properties" : {
-                  "cart_item" : {
-                    "type" : "object",
-                    "properties" : {
-                      "id" : "integer"
-                    }
-                  }
-                },
-                "required" : [ "id" ]
-              },
-              "example" : {
-                "id" : 1
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Item deleted successfully",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "cart" : {
-                      "type" : "object",
-                      "properties" : {
-                        "id" : {
-                          "type" : "integer"
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "id" : 1
-                  }
-                }
-              }
-            }
-          },
-          "422" : {
-            "description" : "Unprocessable Entity",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "erros" : {
-                      "type" : "array"
-                    }
-                  },
-                  "example" : {
-                    "user" : [ "you must login" ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/cart_items/checkout" : {
-      "get" : {
-        "summary" : "List user cart items",
-        "description" : "List user cart items",
-        "security" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "Successfully returned a list of product",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "properties" : {
-                    "address" : "string",
-                    "shopes" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "object",
-                        "properties" : {
-                          "id" : "integer",
-                          "name" : "string",
-                          "delivery_time" : "string",
-                          "logo" : "string",
-                          "products" : {
-                            "type" : "array",
-                            "properties" : {
-                              "id" : "integer",
-                              "product_id" : "integer",
-                              "price" : "integer",
-                              "description" : "string",
-                              "name" : "string",
-                              "quantity" : "integer"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "example" : {
-                    "checkout" : {
-                      "shops" : [ {
-                        "id" : 1,
-                        "name" : "Alef",
-                        "logo" : null,
-                        "delivery_time" : null,
-                        "products" : [ {
-                          "id" : 4,
-                          "name" : null,
-                          "variant_id" : 1,
-                          "price" : 500,
-                          "description" : "aa",
-                          "quantity" : 2
-                        }, {
-                          "id" : 1,
-                          "name" : null,
-                          "variant_id" : 2,
-                          "price" : 600,
-                          "description" : "test",
-                          "quantity" : 2
-                        } ]
-                      } ],
-                      "address" : "sdakdnaskndkan"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/promocode/check" : {
       "get" : {
         "summary" : "check validity of a promocode",
@@ -1945,6 +1454,111 @@
           }
         }
       }
+    },
+    "/complains" : {
+      "get" : {
+        "summary" : "list a user's complains",
+        "description" : "list all complains of a user",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "created_at" : {
+                        "type" : "string"
+                      },
+                      "human_readable_time" : {
+                        "type" : "string"
+                      },
+                      "content" : {
+                        "type" : "string"
+                      },
+                      "category_name" : {
+                        "type" : "string"
+                      }
+                    },
+                    "example" : {
+                      "id" : 1,
+                      "craeted_at" : "2018-08-13T11:01:11.357Z",
+                      "human_readable_time" : "less than a minute",
+                      "content" : "There was a problem in my order",
+                      "category_name" : "Shop Delivery Time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "craete a compalin on a shop order",
+        "description" : "user can create a complain on a shop order",
+        "responses" : {
+          "201" : {
+            "description" : "Entity Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  },
+                  "example" : {
+                    "message" : "Complain was successfully created."
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable Entity",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "shop_order_id" : {
+                    "type" : "integer"
+                  },
+                  "complain_category_id" : {
+                    "type" : "integer"
+                  },
+                  "content" : {
+                    "type" : "string"
+                  }
+                },
+                "example" : {
+                  "shop_order_id" : 1,
+                  "complain_category_id" : 1,
+                  "content" : "There was a problem in my order"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -1952,20 +1566,41 @@
       "User" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "type" : "integer"
+          "auth_token" : {
+            "type" : "string",
+            "example" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA"
           },
-          "email" : {
-            "type" : "string"
-          },
-          "full_name" : {
-            "type" : "string"
-          },
-          "avatar" : {
+          "user" : {
             "type" : "object",
             "properties" : {
-              "url" : {
-                "type" : "string"
+              "id" : {
+                "type" : "integer",
+                "example" : 1
+              },
+              "email" : {
+                "type" : "string",
+                "example" : "islam.askar@gmail.com"
+              },
+              "full_name" : {
+                "type" : "string",
+                "example" : "Islam Askar"
+              },
+              "mobile" : {
+                "type" : "string",
+                "example" : 1.111100956E9
+              },
+              "avatar" : {
+                "type" : "object",
+                "properties" : {
+                  "url" : {
+                    "type" : "string",
+                    "example" : "/uploads/user/avatar/6/avatar.jpeg"
+                  }
+                }
+              },
+              "mobile_verified" : {
+                "type" : "boolean",
+                "example" : false
               }
             }
           }
@@ -1977,21 +1612,6 @@
         "type" : "http",
         "scheme" : "bearer",
         "bearerFormat" : "JWT"
-      }
-    },
-    "examples" : {
-      "User" : {
-        "auth_token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.Hl3PblT_RcxmeMKCr-CTGdsgK_Yqh3RRp6nrA0YZueA",
-        "user" : {
-          "id" : 1,
-          "email" : "islam.askar@gmail.com",
-          "full_name" : "Islam Askar",
-          "mobile" : 1.111100956E9,
-          "avatar" : {
-            "url" : "/uploads/user/avatar/6/avatar.jpeg"
-          },
-          "mobile_verified" : false
-        }
       }
     }
   },
