@@ -9,7 +9,7 @@
   } ],
   "info" : {
     "version" : "1.0.0",
-    "title" : "Comprando API V",
+    "title" : "Comprando API V1",
     "description" : "This is the first version of the API used for the  **mobile clients** (*iOS and Andriod*). It will focus on the buyer's operations.  Visit [http://comprando.io/](http://comprando.io/). Jira [http://jira.comprando.io/](http://jira.comprando.io/), Documentation and Wiki [http://docs.comprando.io](http://docs.comprando.io), API Documentation [http://apidocs.comprando.io/](http://apidocs.comprando.io/) and the Stagging server [http://stagging.comprando.io/](http://stagging.comprando.io/)."
   },
   "paths" : {
