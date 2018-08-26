@@ -1487,7 +1487,7 @@
                     },
                     "example" : {
                       "id" : 1,
-                      "craeted_at" : "2018-08-13T11:01:11.357Z",
+                      "created_at" : "2018-08-13T11:01:11.357Z",
                       "human_readable_time" : "less than a minute",
                       "content" : "There was a problem in my order",
                       "category_name" : "Shop Delivery Time"
@@ -1500,7 +1500,7 @@
         }
       },
       "post" : {
-        "summary" : "craete a compalin on a shop order",
+        "summary" : "create a compalin on a shop order",
         "description" : "user can create a complain on a shop order",
         "responses" : {
           "201" : {
@@ -1553,6 +1553,39 @@
                   "shop_order_id" : 1,
                   "complain_category_id" : 1,
                   "content" : "There was a problem in my order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment_methods" : {
+      "get" : {
+        "summary" : "list available payment methods for buyers to use",
+        "description" : "list all payment methods supported by the application to give variety of options for the buyers to pay for their orders",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "payment_type" : {
+                        "type" : "string"
+                      }
+                    },
+                    "example" : {
+                      "id" : 1,
+                      "payment_type" : "Cash on Delivery"
+                    }
+                  }
                 }
               }
             }
