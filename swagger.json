@@ -1823,6 +1823,59 @@
           }
         }
       }
+    },
+    "/rating" : {
+      "post" : {
+        "summary" : "user gives rating to an order he made",
+        "description" : "user gives separate ratings to each sub-order within the main order",
+        "responses" : {
+          "201" : {
+            "description" : "Entity Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  },
+                  "example" : {
+                    "message" : "hank you for your rating!"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "to give a rating to sub-order, send the following (branch_id, shop_order_id, rating)",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "rating" : {
+                    "type" : "object",
+                    "properties" : {
+                      "branch_id" : {
+                        "type" : "integer"
+                      },
+                      "shop_order_id" : {
+                        "type" : "integer"
+                      },
+                      "rating" : {
+                        "type" : "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
