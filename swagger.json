@@ -1597,6 +1597,13 @@
       "get" : {
         "summary" : "return the user's wishlist items",
         "description" : "listing all items that have been added to the user's wishlist along with needed info about each item (shop, branch, variant . . . etc.)",
+        "parameters" : [ {
+          "name" : "auth_token",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "Ok",
