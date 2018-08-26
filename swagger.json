@@ -646,8 +646,8 @@
         "description" : "List nearby/offshore shops based on parameters",
         "security" : [ ],
         "parameters" : [ {
-          "in" : "query",
           "name" : "shop_type",
+          "in" : "query",
           "schema" : {
             "type" : "string"
           },
