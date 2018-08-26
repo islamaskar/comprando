@@ -1592,6 +1592,230 @@
           }
         }
       }
+    },
+    "/wishlist" : {
+      "get" : {
+        "summary" : "return the user's wishlist items",
+        "description" : "listing all items that have been added to the user's wishlist along with needed info about each item (shop, branch, variant . . . etc.)",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "shops" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "shop_name" : {
+                            "type" : "string"
+                          },
+                          "branch_name" : {
+                            "type" : "string"
+                          },
+                          "logo" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          },
+                          "items" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : {
+                                  "type" : "integer"
+                                },
+                                "product_name" : {
+                                  "type" : "string"
+                                },
+                                "variant_name" : {
+                                  "type" : "string"
+                                },
+                                "product_id" : {
+                                  "type" : "integer"
+                                },
+                                "variant_id" : {
+                                  "type" : "integer"
+                                },
+                                "image" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "url" : {
+                                      "type" : "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "add new item to the user's wishlist and display it",
+        "description" : "listing all items that have been added to the user's wishlist (including the newly-added item) along with needed info about each item (shop, branch, variant . . . etc.)",
+        "responses" : {
+          "201" : {
+            "description" : "Entity Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "shops" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "shop_name" : {
+                            "type" : "string"
+                          },
+                          "branch_name" : {
+                            "type" : "string"
+                          },
+                          "logo" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          },
+                          "items" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : {
+                                  "type" : "integer"
+                                },
+                                "product_name" : {
+                                  "type" : "string"
+                                },
+                                "variant_name" : {
+                                  "type" : "string"
+                                },
+                                "product_id" : {
+                                  "type" : "integer"
+                                },
+                                "variant_id" : {
+                                  "type" : "integer"
+                                },
+                                "image" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "url" : {
+                                      "type" : "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "logical delete of an item from the user's wishlist",
+        "description" : "removing (hiding) an item from the user's wishlist while perserving it (archiving) within the wishlist to keep history",
+        "responses" : {
+          "202" : {
+            "description" : "Entity Deleted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "shops" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "shop_name" : {
+                            "type" : "string"
+                          },
+                          "branch_name" : {
+                            "type" : "string"
+                          },
+                          "logo" : {
+                            "type" : "object",
+                            "properties" : {
+                              "url" : {
+                                "type" : "string"
+                              }
+                            }
+                          },
+                          "items" : {
+                            "type" : "array",
+                            "items" : {
+                              "type" : "object",
+                              "properties" : {
+                                "id" : {
+                                  "type" : "integer"
+                                },
+                                "product_name" : {
+                                  "type" : "string"
+                                },
+                                "variant_name" : {
+                                  "type" : "string"
+                                },
+                                "product_id" : {
+                                  "type" : "integer"
+                                },
+                                "variant_id" : {
+                                  "type" : "integer"
+                                },
+                                "image" : {
+                                  "type" : "object",
+                                  "properties" : {
+                                    "url" : {
+                                      "type" : "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components" : {
