@@ -1591,6 +1591,62 @@
         }
       }
     },
+    "/shop_orders/{shop_order_id}/complains/{complain_id}/complain_reply" : {
+      "post" : {
+        "summary" : "create a new reply on this complaint",
+        "description" : "create a new reply on this complaint",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_order_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        }, {
+          "in" : "path",
+          "name" : "complain_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Entity created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string"
+                    }
+                  },
+                  "example" : {
+                    "message" : "reply added successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "content" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/payment_methods" : {
       "get" : {
         "summary" : "list available payment methods for buyers to use",
