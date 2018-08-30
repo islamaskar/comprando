@@ -1455,42 +1455,69 @@
         }
       }
     },
-    "/complains" : {
+    "/shop_orders/{shop_order_id}/complain" : {
       "get" : {
-        "summary" : "list a user's complains",
-        "description" : "list all complains of a user",
+        "summary" : "show a user's complain on one order",
+        "description" : "show a user's complain on one shop order",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_order_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
         "responses" : {
           "200" : {
             "description" : "Ok",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "object",
-                    "properties" : {
-                      "id" : {
-                        "type" : "integer"
-                      },
-                      "created_at" : {
-                        "type" : "string"
-                      },
-                      "human_readable_time" : {
-                        "type" : "string"
-                      },
-                      "content" : {
-                        "type" : "string"
-                      },
-                      "category_name" : {
-                        "type" : "string"
-                      }
+                  "type" : "object",
+                  "properties" : {
+                    "id" : {
+                      "type" : "integer"
                     },
-                    "example" : {
-                      "id" : 1,
-                      "created_at" : "2018-08-13T11:01:11.357Z",
-                      "human_readable_time" : "less than a minute",
-                      "content" : "There was a problem in my order",
-                      "category_name" : "Shop Delivery Time"
+                    "user_name" : {
+                      "type" : "string"
+                    },
+                    "category_name" : {
+                      "type" : "string"
+                    },
+                    "created_at" : {
+                      "type" : "string"
+                    },
+                    "human_readable_time" : {
+                      "type" : "string"
+                    },
+                    "content" : {
+                      "type" : "string"
+                    },
+                    "replies" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "properties" : {
+                          "id" : {
+                            "type" : "integer"
+                          },
+                          "complain_id" : {
+                            "type" : "integer"
+                          },
+                          "content" : {
+                            "type" : "string"
+                          },
+                          "created_at" : {
+                            "type" : "string"
+                          },
+                          "user_name" : {
+                            "type" : "string"
+                          },
+                          "org" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1502,6 +1529,14 @@
       "post" : {
         "summary" : "create a compalin on a shop order",
         "description" : "user can create a complain on a shop order",
+        "parameters" : [ {
+          "in" : "path",
+          "name" : "shop_order_id",
+          "schema" : {
+            "type" : "integer"
+          },
+          "required" : true
+        } ],
         "responses" : {
           "201" : {
             "description" : "Entity Created",
@@ -1539,9 +1574,6 @@
               "schema" : {
                 "type" : "object",
                 "properties" : {
-                  "shop_order_id" : {
-                    "type" : "integer"
-                  },
                   "complain_category_id" : {
                     "type" : "integer"
                   },
@@ -1550,9 +1582,8 @@
                   }
                 },
                 "example" : {
-                  "shop_order_id" : 1,
                   "complain_category_id" : 1,
-                  "content" : "There was a problem in my order"
+                  "content" : "This shop sent me wrong items"
                 }
               }
             }
@@ -1867,6 +1898,62 @@
                       },
                       "rating" : {
                         "type" : "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/addresses" : {
+      "get" : {
+        "summary" : "list all available addresses for current user",
+        "description" : "list all available addresses for current user",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "street" : {
+                        "type" : "string"
+                      },
+                      "building_number" : {
+                        "type" : "string"
+                      },
+                      "appartment_number" : {
+                        "type" : "string"
+                      },
+                      "floor_number" : {
+                        "type" : "string"
+                      },
+                      "landmark" : {
+                        "type" : "string"
+                      },
+                      "latitude" : {
+                        "type" : "string"
+                      },
+                      "longitude" : {
+                        "type" : "string"
+                      },
+                      "region" : {
+                        "type" : "string"
+                      },
+                      "city" : {
+                        "type" : "string"
+                      },
+                      "country" : {
+                        "type" : "string"
                       }
                     }
                   }
