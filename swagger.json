@@ -1455,6 +1455,41 @@
         }
       }
     },
+    "/complain_categories" : {
+      "get" : {
+        "summary" : "list of complain categories",
+        "description" : "list of complain categories for the user to choose one of them when submitting his complaint",
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "created_at" : {
+                        "type" : "string"
+                      },
+                      "updated_at" : {
+                        "type" : "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/shop_orders/{shop_order_id}/complain" : {
       "get" : {
         "summary" : "show a user's complain on one order",
