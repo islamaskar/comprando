@@ -1978,19 +1978,14 @@
               "schema" : {
                 "type" : "object",
                 "properties" : {
+                  "branch_id" : {
+                    "type" : "integer"
+                  },
+                  "shop_order_id" : {
+                    "type" : "integer"
+                  },
                   "rating" : {
-                    "type" : "object",
-                    "properties" : {
-                      "branch_id" : {
-                        "type" : "integer"
-                      },
-                      "shop_order_id" : {
-                        "type" : "integer"
-                      },
-                      "rating" : {
-                        "type" : "integer"
-                      }
-                    }
+                    "type" : "integer"
                   }
                 }
               }
