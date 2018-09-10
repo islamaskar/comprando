@@ -1356,6 +1356,73 @@
         }
       }
     },
+    "/change-password" : {
+      "post" : {
+        "summary" : "user change his password",
+        "description" : "User can change his password by sending the current and the new passwords\n",
+        "security" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string",
+                      "example" : "Password has been changed successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422" : {
+            "description" : "Unprocessable",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "message" : {
+                      "type" : "string",
+                      "example" : "Password not changed"
+                    },
+                    "errors" : {
+                      "type" : "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody" : {
+          "description" : "You have to provide the user's current password, new password and it's confirmation to change the user's password",
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "password_confirmation" : {
+                    "type" : "string"
+                  },
+                  "current_password" : {
+                    "type" : "string"
+                  }
+                },
+                "required" : [ "password", "password_confirmation", "current_password" ]
+              }
+            }
+          }
+        }
+      }
+    },
     "/reset-password" : {
       "post" : {
         "summary" : "Forget password instructions",
