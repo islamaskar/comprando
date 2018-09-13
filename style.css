@@ -1,0 +1,50 @@
+body {
+  font-family: sans-serif; }
+
+h1, h2, h3, h4 {
+  color: #fe414f; }
+
+.header-social, .social {
+  display: flex;
+  list-style: none; }
+  .header-social .social-icon, .social .social-icon {
+    margin: 0 5%;
+    display: inline-block; }
+    .header-social .social-icon a, .social .social-icon a {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      color: #fe414f; }
+    .header-social .social-icon a:hover, .social .social-icon a:hover {
+      color: white;
+      display: inline-block;
+      background: #fe414f;
+      line-height: 25px;
+      text-align: center;
+      border: 2px solid #fe414f;
+      border-radius: 5px; }
+  .header-social li:last-child .bars, .social li:last-child .bars {
+    margin: 0 30%; }
+
+.tail, .tail-left {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; }
+
+.header, .tail-right {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
+  .header .header-logo, .tail-right .header-logo {
+    width: 90%; }
+    .header .header-logo img, .tail-right .header-logo img {
+      width: 15%; }
+
+.content {
+  margin: 0% 8%; }
+  .content a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fe414f; }
+
+/*# sourceMappingURL=style.css.map */

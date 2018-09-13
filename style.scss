@@ -1,0 +1,57 @@
+$pink:#fe414f;
+body{
+    font-family: sans-serif;
+}
+h1,h2,h3,h4{
+    color: $pink;
+}
+.header-social ,.social{
+        display: flex;
+        list-style: none;
+        .social-icon{ 
+            margin: 0 5%;
+            display: inline-block;
+            a{
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                color: $pink;
+            }
+            a:hover{
+                color: white;
+                display: inline-block;
+                background: $pink;
+                line-height: 25px;
+                text-align: center;
+                border: 2px solid $pink;
+                border-radius: 5px;
+            }
+        }
+        li:last-child .bars{
+            margin: 0 30%;
+        }
+    }
+    .tail,.tail-left{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+.header,.tail-right{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .header-logo{
+        width: 90%;
+        img{
+            width:15%;
+        }
+    }
+}
+.content{
+    margin: 0% 8%;
+    a{
+        text-decoration: none;
+        font-weight: bold;
+        color: $pink;
+    }
+}
